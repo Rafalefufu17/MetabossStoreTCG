@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec 3 CTA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000; /* Fond noir */
+            color: #fff; /* Texte en blanc pour le contraste */
+            position: relative;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* S'assurer que la page prend toute la hauteur */
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+            position: relative;
+            z-index: 2;
+            font-family: "Arial Black", Arial, sans-serif;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5em;
+            position: relative;
+            z-index: 2;
+            font-family: "Arial Black", Arial, sans-serif; /* Set font for h3 */
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1em;
+            position: relative;
+            color: #00dfdf;
+            z-index: 2;
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            text-align: center;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .cta-button.vinted {
+            background-color: #00BFA5; /* Exact brand color for Vinted */
+        }
+
+        .cta-button.leboncoin {
+            background-color: #FF6F00; /* Exact brand color for LeBonCoin */
+        }
+
+        .cta-button.ebay {
+            background-color: #E53238; /* Exact brand color for eBay */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-background {
+            position: absolute;
+            top: 52%;
+            left: -100%; /* Start outside the left boundary */
+            width: 500px;
+            height: auto;
+            z-index: 1;
+            opacity: 0.75;
+            transform: translateY(-50%);
+            transition: left 0.33s ease-out; /* Slower sliding effect */
+        }
+
+        .image-side {
+            position: absolute;
+            top: 54%;
+            right: -100%; /* Start outside the right boundary */
+            width: 220px;
+            height: auto;
+            z-index: 3;
+            transform: translateY(-50%);
+            transition: right 0.5s ease-out; /* Slower sliding effect */
+        }
+
+        .slide-in-left {
+            left: 18%; /* End position for sliding in from left */
+        }
+
+        .slide-in-right {
+            right: 27%; /* End position for sliding in from right */
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                width: 150px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .image-background {
+                width: 150px;
+                left: -100%; /* Start outside the left boundary for smaller screens */
+            }
+
+            .image-side {
+                width: 120px;
+                right: -100%; /* Start outside the right boundary for smaller screens */
+            }
+
+            .slide-in-left {
+                left: 2%; /* Adjust end position for smaller screens */
+            }
+
+            .slide-in-right {
+                right: 2%; /* Adjust end position for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Image en arrière-plan -->
+    <img src="{{ url_for('pic', filename='IMG_4887.png') }}" alt="Metagross" class="image-background" id="metagross">
+
+    <h1>Bienvenue dans ma boutique !</h1>
+    <p>Cliquez sur un bouton ci-dessous pour visiter le site :</p>
+
+    <h3>Plateforme Ventes</h3>
+
+    <div class="cta-container">
+        <a href="https://www.vinted.fr/member/42455386" class="cta-button vinted" target="_blank">Visitez Vinted</a>
+        <a href="https://www.leboncoin.fr/profil/2ebf9c44-d369-4f39-b998-4f017326239f/offres" class="cta-button leboncoin" target="_blank">Visitez LeBonCoin</a>
+        <a href="https://www.ebay.fr/sch/i.html?item=145857853049&rt=nc&_trksid=p4429486.m145687.l2562&_ssn=rapfue27" class="cta-button ebay" target="_blank">Visitez eBay</a>
+    </div>
+    
+    <!-- Image sur le côté droit -->
+    <img src="{{ url_for('pic', filename='IMG_4892.png') }}" alt="Metaboss" class="image-side" id="metaboss">
+
+    <script>
+        // Wait until the content is fully loaded
+        window.onload = function() {
+            // Start sliding in Metagross first
+            document.getElementById('metagross').classList.add('slide-in-left');
+            
+            // Delay sliding in Metaboss by 1 second
+            setTimeout(function() {
+                document.getElementById('metaboss').classList.add('slide-in-right');
+            }, 500); // 1000 milliseconds = 1 second
+        };
+    </script>
+</body>
+</html>
